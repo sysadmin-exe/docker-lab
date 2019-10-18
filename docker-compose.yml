@@ -6,6 +6,7 @@ services:
 #deploy go-app from the binary and use dockerfile
   go-app:
     build: ./golang-webserver
+    hostname: go-app
     port:
       - "5001:8080"
     networks: 
@@ -15,6 +16,7 @@ services:
 #deploy the java app
   java-app:
     build: ./java-webserver
+    hostname: java-app
     port:
       - "5002:8080"
     networks: 
@@ -30,10 +32,11 @@ services:
     volumes:
       - ./default.conf:/etc/nginx/conf.d/default.conf
     ports:
-      - 8080:80
+      - 8081:80
     networks: 
       - frontend
-
+      - backend
+	
 #deploy networks
 networks:
   backend:
