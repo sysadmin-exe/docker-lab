@@ -7,7 +7,7 @@ services:
   go-app:
     build: ./golang-webserver
     hostname: go-app
-    port:
+    ports:
       - "5001:8080"
     networks: 
       - backend
@@ -17,14 +17,14 @@ services:
   java-app:
     build: ./java-webserver
     hostname: java-app
-    port:
+    ports:
       - "5002:8080"
     networks: 
       - backend
       - frontend
 
 #nginx load balancer
-  nginx:
+  load-balancer:
     image: nginx:1.15
     depends_on: 
       - go-app
@@ -36,7 +36,7 @@ services:
     networks: 
       - frontend
       - backend
-	
+      
 #deploy networks
 networks:
   backend:
